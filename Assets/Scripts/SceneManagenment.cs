@@ -31,9 +31,4 @@ public class SceneManagenment : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void WinnerButton()
-    {
-        SceneManager.LoadScene(2);
-    }
 }
