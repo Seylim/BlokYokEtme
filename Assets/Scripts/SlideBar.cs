@@ -22,7 +22,7 @@ public class SlideBar : MonoBehaviour
             //save began touch 2d point
             firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButton(0))
         {
             //save ended touch 2d point
             secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
