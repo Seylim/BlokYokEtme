@@ -5,16 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagenment : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Scene(string sceneName)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SceneManager.LoadScene(sceneName);
     }
 
     public void StartGame()
@@ -30,5 +23,10 @@ public class SceneManagenment : MonoBehaviour
     public void ExitApplication()
     {
         Application.Quit();
+    }
+
+    public void LoseScreen()
+    {
+        SceneManager.LoadScene(3);
     }
 }

@@ -7,7 +7,10 @@ public class SlideBar : MonoBehaviour
     Vector2 firstPressPos;
     Vector2 secondPressPos;
     Vector2 currentSwipe;
+    bool leftWallCollision;
+    bool rightWallColision;
     [SerializeField] float velocity;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +20,7 @@ public class SlideBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(0))
         {
             //save began touch 2d point
@@ -29,20 +33,39 @@ public class SlideBar : MonoBehaviour
 
             //create vector from the two points
             currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
-
             //normalize the 2d vector
             currentSwipe.Normalize();
 
             //swipe left
-            if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+            if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && !leftWallCollision)
             {
                 transform.position += Vector3.left * velocity * Time.timeScale;
+                firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                rightWallColision = false;
             }
             //swipe right
-            if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+            if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && !rightWallColision)
             {
                 transform.position += Vector3.right * velocity * Time.timeScale;
+                firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+                leftWallCollision = false;
             }
+        }
+    }
+
+    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "LeftWall")
+        {
+            leftWallCollision = true;
+            transform.position = new Vector3(-4.75f, transform.position.y, transform.position.z);
+        }
+        if (collision.gameObject.tag == "RightWall")
+        {
+            rightWallColision = true;
+            transform.position = new Vector3(4.75f, transform.position.y, transform.position.z);
         }
     }
 }
