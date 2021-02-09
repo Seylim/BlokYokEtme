@@ -10,6 +10,7 @@ public class SlideBar : MonoBehaviour
     bool leftWallCollision;
     bool rightWallColision;
     [SerializeField] float velocity;
+    [SerializeField] Animator myAnimator;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,15 @@ public class SlideBar : MonoBehaviour
         }
     }
 
-    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ball")
+        {
+            myAnimator.SetBool("BallHit", true);
+        }
+    }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

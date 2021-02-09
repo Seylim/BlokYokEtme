@@ -25,19 +25,8 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.tag == "SlideBar")
         {
             myBody.velocity = Vector3.up * velocity;
-            sliderBar = collision.gameObject;
-            StartCoroutine(SliderBarAnim());
         }
     }
 
-    private IEnumerator SliderBarAnim()
-    {
-        sliderBar.transform.position = new Vector3(sliderBar.transform.position.x, -8.6f, sliderBar.transform.position.z);
-        yield return new WaitForSeconds(0.1f);
-        sliderBar.transform.position = new Vector3(sliderBar.transform.position.x, -8.4f, sliderBar.transform.position.z);
-        yield return new WaitForSeconds(0.1f);
-        sliderBar.transform.position = new Vector3(sliderBar.transform.position.x, -8.5f, sliderBar.transform.position.z);
-        yield return new WaitForSeconds(0.1f);
-
-    }
+    
 }
