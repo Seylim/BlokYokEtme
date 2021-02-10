@@ -8,6 +8,7 @@ public class CameraSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Kamerayı arkaplanın en ve boy oranına göre ayarlıyoruz.
         float screenRatio = (float)Screen.width / (float)Screen.height;
         float targetRatio = backGround.bounds.size.x / backGround.bounds.size.y;
 

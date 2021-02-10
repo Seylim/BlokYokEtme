@@ -7,18 +7,14 @@ public class SlideBar : MonoBehaviour
     Vector2 firstPressPos;
     Vector2 secondPressPos;
     Vector2 currentSwipe;
+    //SlideBar'ın sol duvar ile temasını kontrol eden değişken.
     bool leftWallCollision;
+    //SlideBar'ın sağ duvar ile temasını kontrol eden değişken.
     bool rightWallColision;
+    //SlideBar'ın hızını belirleyen değişken.
     [SerializeField] float velocity;
     [SerializeField] Animator myAnimator;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         
@@ -40,6 +36,7 @@ public class SlideBar : MonoBehaviour
             //swipe left
             if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && !leftWallCollision)
             {
+                //SlideBar'ın sola doğru harekerini sağlıyoruz.
                 transform.position += Vector3.left * velocity * Time.timeScale;
                 firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 rightWallColision = false;
@@ -47,6 +44,7 @@ public class SlideBar : MonoBehaviour
             //swipe right
             if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && !rightWallColision)
             {
+                //SlideBar'ın sağa doğru harekerini sağlıyoruz.
                 transform.position += Vector3.right * velocity * Time.timeScale;
                 firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 leftWallCollision = false;
@@ -54,18 +52,13 @@ public class SlideBar : MonoBehaviour
         }
     }
 
+    //SliderBar'ın temaslarını kontrol ettiğimiz fonksiyon.
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ball")
         {
-            myAnimator.SetBool("BallHit", true);
+            AnimationStart();
         }
-    }
-
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
         if (collision.gameObject.tag == "LeftWall")
         {
             leftWallCollision = true;
@@ -76,5 +69,18 @@ public class SlideBar : MonoBehaviour
             rightWallColision = true;
             transform.position = new Vector3(4.75f, transform.position.y, transform.position.z);
         }
+    }
+    //SliderBar'ın animasyonunu devreye sokan fonksiyon.
+    public void AnimationStart()
+    {
+        myAnimator.SetBool("BallHit", true);
+        StartCoroutine(AnimationController());
+    }
+
+    //SliderBar'ın animasyonunu belli bir süre sonra tekrar ilk haline çeviren fonksiyon.
+    private IEnumerator AnimationController()
+    {
+        yield return new WaitForSeconds(1f);
+        myAnimator.SetBool("BallHit", false);
     }
 }

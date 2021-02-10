@@ -5,26 +5,31 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagenment : MonoBehaviour
 {
+    //Herhangi bir sahneye geçiş yapmak için kullanılan fonksiyon.
     public void Scene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
+    //Oyun sahnesi
     public void StartGame()
     {
         SceneManager.LoadScene(1);
     }
 
+    //Oyunun başlangıcındaki ilk sahne.
     public void HomePage()
     {
         SceneManager.LoadScene(0);
     }
 
+    //Uygulamayı sonlandıran fonksiyon.
     public void ExitApplication()
     {
         Application.Quit();
     }
 
+    //Oyun kaybetme sahnesi. 
     public void LoseScreen()
     {
         SceneManager.LoadScene(3);
