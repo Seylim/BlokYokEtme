@@ -7,6 +7,8 @@ public class SlideBar : MonoBehaviour
     Vector2 firstPressPos;
     Vector2 secondPressPos;
     Vector2 currentSwipe;
+    public bool left = false;
+    public bool right = false;
     //SlideBar'ın sol duvar ile temasını kontrol eden değişken.
     bool leftWallCollision;
     //SlideBar'ın sağ duvar ile temasını kontrol eden değişken.
@@ -40,6 +42,8 @@ public class SlideBar : MonoBehaviour
                 transform.position += Vector3.left * velocity * Time.timeScale;
                 firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 rightWallColision = false;
+                right = false;
+                left = true;
             }
             //swipe right
             if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && !rightWallColision)
@@ -48,6 +52,13 @@ public class SlideBar : MonoBehaviour
                 transform.position += Vector3.right * velocity * Time.timeScale;
                 firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
                 leftWallCollision = false;
+                left = false;
+                right = true;
+            }
+            if (currentSwipe.x == 0)
+            {
+                left = false;
+                right = false;
             }
         }
     }

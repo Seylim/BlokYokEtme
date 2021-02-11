@@ -19,7 +19,19 @@ public class Ball : MonoBehaviour
         {
             start = true;
             slideBar.AnimationStart();
-            myBody.velocity = Vector3.up * velocity;
+            if (slideBar.right)
+            {
+                myBody.velocity = new Vector3(2f, velocity, 0f);
+            }
+            if (slideBar.left)
+            {
+                myBody.velocity = new Vector3(-2f, velocity, 0f);
+            }
+            if(!slideBar.left && !slideBar.right)
+            {
+                myBody.velocity = Vector3.up * velocity;
+            }
+            
         }
         //Eğer oyun başlamamışsa topu slideBar ile birlikte hareket etmesini sağlıyoruz.
         if (!start)
