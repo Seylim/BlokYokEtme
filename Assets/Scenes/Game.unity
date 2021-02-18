@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275bc628d44e7d6489aaed2af72eab59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 10
+  velocity: 8
   myBody: {fileID: 106618939}
   slideBar: {fileID: 343773186}
   ballSound: {fileID: 106618942}
@@ -1209,7 +1209,7 @@ Transform:
   m_GameObject: {fileID: 343773182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -8.5, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
