@@ -15,6 +15,7 @@ public class SceneManagenment : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+        Blocks.totalBlockNumber = 0;
     }
 
     //Oyunun başlangıcındaki ilk sahne.
@@ -27,6 +28,10 @@ public class SceneManagenment : MonoBehaviour
     public void ExitApplication()
     {
         Application.Quit();
+    }
+    public void WinnerScreen()
+    {
+        SceneManager.LoadScene(2);
     }
 
     //Oyun kaybetme sahnesi. 

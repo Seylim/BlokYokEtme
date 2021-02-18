@@ -8,12 +8,17 @@ public class Ball : MonoBehaviour
     [SerializeField] float velocity;
     [SerializeField] Rigidbody2D myBody;
     [SerializeField] SlideBar slideBar;
+    [SerializeField] AudioSource ballSound;
+    [SerializeField] SceneManagenment scene;
+    private float ballFirstPositionX;
+    private float ballLastPositionX;
     //Oyunun başladığını belirliyen değişken.
     bool start;
 
     // Update is called once per frame
     void Update()
     {
+        ballFirstPositionX = transform.position.x;
         //Eğer mouse tıklaması bırkıldığında ve oyun başlamamışsa oyunu başlatıyoruz, sliderBar animasyonunu başlatıyoruz ve topa hareket sağlıyoruz.
         if (Input.GetMouseButtonUp(0) && !start)
         {
@@ -37,6 +42,29 @@ public class Ball : MonoBehaviour
         if (!start)
         {
             gameObject.transform.position = new Vector3(slideBar.transform.position.x, slideBar.transform.position.y + 0.284f, slideBar.transform.position.z);
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (start)
+        {
+            ballSound.Play();
+        }
+
+        if (Blocks.totalBlockNumber <= 0)
+        {
+            scene.WinnerScreen();
+        }
+
+        if (collision.gameObject.tag == "SlideBar")
+        {
+            ballLastPositionX = transform.position.x;
+            if (ballFirstPositionX == ballLastPositionX)
+            {
+                myBody.velocity = new Vector3(Random.Range(-2f, 2f), myBody.velocity.y, 0f);
+            }
         }
     }
 }
